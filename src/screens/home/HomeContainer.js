@@ -1,5 +1,7 @@
 import React from "react";
 import Home from "./Home";
+import ApiMain from "../../services/Api";
+import Env from "../../../environments";
 
 export default class HomeContainer extends React.Component {
 
@@ -16,18 +18,37 @@ export default class HomeContainer extends React.Component {
     };
   }
 
-  initiateInstances(){}
+  initiateInstances(){
+    this.beginGame = this.beginGame.bind(this);
+    //create redux store here
+  }
 
   componentDidMount(){
 
   }
 
   beginGame(){
+    this.setState({showLoading : true}, () => this.getAllQuestionAndAnswer());
+  }
 
-    this.props.navigation.push('quiz');
+  getAllQuestionAndAnswer(){
+        new ApiMain().getApi(new Env().getBaseUrl(),new Env().getPath()['get_quiz'], null,
+         false, false, null)
+        .then((response) => response.json())
+          .then((responseJson) => {
+              console.log(responseJson.results);
+               //store data to redux store
+
+              this.props.navigation.push('quiz');
+
+
+            })
+            .catch((error) => {
+              console.log(error);
+            });
   }
 
   render(){
-    return <Home showLoading={this.state.showLoading} />;
+    return <Home showLoading={this.state.showLoading} beginGame={this.beginGame} />;
   }
 }
