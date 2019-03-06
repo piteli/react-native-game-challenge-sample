@@ -9,28 +9,25 @@ export const styles = StyleSheet.create({
   alignItems : 'center'
   },
   sectionTop : {
-    flex : 0.2,
-    flexDirection : 'row',
+    flex : 0.25,
+    flexDirection : 'column',
     justifyContent : 'center',
     alignItems : 'center'
   },
-  sectionCenter1 : {
-    flex : 0.3,
-    flexDirection : 'row',
-    justifyContent : 'center',
-    alignItems : 'center'
-  },
-  sectionCenter2 : {
-    flex : 0.3,
+  sectionCenter : {
+    flex : 0.5,
     flexDirection : 'row',
     justifyContent : 'center',
     alignItems : 'center'
   },
   sectionBottom : {
-    flex : 0.2,
+    flex : 0.25,
     flexDirection : 'column',
     justifyContent : 'center',
     alignItems : 'center'
   },
-
+  listView : {
+    borderBottomWidth: 1,
+    borderBottomColor : 'black'
+  }
 });

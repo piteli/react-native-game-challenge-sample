@@ -3,7 +3,8 @@ import {ADD_QUIZ_ANSWER, REMOVE_ALL_QUIZ, ADD_ANSWER} from './type';
 
 const INITIAL_STATE = {
   quizs : [],
-  userAnswers : []
+  correctAnswers : 0,
+  questionsAndAnswers : []
 };
 
 const quizReducer = (state = INITIAL_STATE, action) => {
@@ -15,13 +16,17 @@ const quizReducer = (state = INITIAL_STATE, action) => {
       }
     case REMOVE_ALL_QUIZ:
       return {
-        ...state,
-        quizs: []
+        quizs : [],
+        correctAnswers : 0,
+        questionsAndAnswers : []
       }
     case ADD_ANSWER:
       return {
         ...state,
-        userAnswers: state.userAnswers.concat(action.payload)
+        correctAnswers: action.payload.correctAnswers,
+        questionsAndAnswers: state.questionsAndAnswers.concat(
+          {questionIndex : action.payload.questionIndex, answer : action.payload.answer,
+          question : action.payload.question, correctQuestionAnswer : action.payload.correctQuestionAnswer}),
       }
     default:
       return state

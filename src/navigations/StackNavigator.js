@@ -1,6 +1,7 @@
 import { StackNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
 import HomeIndex from '../screens/home';
 import QuizIndex from '../screens/quiz';
+import ResultIndex from '../screens/result';
 
 const RootStack = createStackNavigator(
   {
@@ -12,6 +13,12 @@ const RootStack = createStackNavigator(
     },
     quiz: {
       screen: QuizIndex,
+      navigationOptions: {
+        header: null,
+        },
+    },
+    result: {
+      screen: ResultIndex,
       navigationOptions: {
         header: null,
         },

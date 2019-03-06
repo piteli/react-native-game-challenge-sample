@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Text, Button} from "react-native";
+import {View, Text, Button, TouchableOpacity} from "react-native";
 import {styles} from './styles';
 import PopupSpinner from '../../components/PopupSpinner'
 
@@ -22,11 +22,12 @@ export default class Home extends React.Component {
         </View>
 
         <View style={styles.sectionBottom}>
-        <Button
+        <TouchableOpacity
           onPress={() => this.props.beginGame()}
-          title="Begin"
-          color="blue"
-          />
+          style={{width : 300, height : 50, borderRadius : 20, justifyContent : 'center', alignItems : 'center',
+                  backgroundColor : 'blue'}}>
+            <Text style={{color : 'white'}}>Begin Game</Text>
+        </TouchableOpacity>
         </View>
 
       </View>

@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Text, Button} from "react-native";
+import {View, Text, Button, TouchableOpacity} from "react-native";
 import {styles} from './styles';
 
 export default class Quiz extends React.Component {
@@ -10,22 +10,28 @@ export default class Quiz extends React.Component {
         <View style={styles.sectionTop}>
             <Text>{this.props.question[this.props.currentQuestionIndex].category}</Text>
         </View>
-        <View style={styles.sectionCenter}>
+        <View style={styles.sectionCenter1}>
             <Text>{this.props.question[this.props.currentQuestionIndex].question}</Text>
         </View>
+        <View style={styles.sectionCenter2}>
+            <Text>{`${this.props.currentQuestionIndex + 1}/${this.props.question.length}`}</Text>
+        </View>
         <View style={styles.sectionBottom}>
-        <Button
-          onPress={() => this.props.setAnswer(this.props.currentQuestionIndex,true)}
-          title="True"
-          color="green"
-          style={{padding : 10 , width : '90%', borderRadius : 20, margin: 20}}
-          />
-        <Button
-          onPress={() => this.props.setAnswer(this.props.currentQuestionIndex, false)}
-          title="False"
-          color="red"
-          style={{padding : 10 , width : '90%', borderRadius : 20}}
-          />
+        <TouchableOpacity
+          onPress={() => this.props.setAnswer(this.props.currentQuestionIndex, 'True',
+          this.props.question[this.props.currentQuestionIndex].question, this.props.question[this.props.currentQuestionIndex].correct_answer)}
+          style={{width : 300, height : 50, borderRadius : 20, justifyContent : 'center', alignItems : 'center',
+                  backgroundColor : 'green'}}>
+            <Text style={{color : 'white'}}>True</Text>
+        </TouchableOpacity>
+        <View style={{height : 10}}></View>
+        <TouchableOpacity
+          onPress={() => this.props.setAnswer(this.props.currentQuestionIndex, 'False', 
+          this.props.question[this.props.currentQuestionIndex].question, this.props.question[this.props.currentQuestionIndex].correct_answer)}
+          style={{width : 300, height : 50, borderRadius : 20, justifyContent : 'center', alignItems : 'center',
+          backgroundColor : 'red'}}>
+            <Text style={{color : 'white'}}>False</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );

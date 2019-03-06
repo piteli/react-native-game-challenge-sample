@@ -1,6 +1,7 @@
 import React from "react";
 import Home from "./Home";
 import ApiMain from "../../services/Api";
+import {BackHandler} from "react-native";
 import Env from "../../../environments";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -12,6 +13,7 @@ class HomeContainer extends React.Component {
     super(props);
     this.initiateStates();
     this.initiateInstances();
+    this.overrideNativeConfig();
   }
 
   initiateStates(){
@@ -24,15 +26,15 @@ class HomeContainer extends React.Component {
   initiateInstances(){
     this.beginGame = this.beginGame.bind(this);
   }
-  
 
-  componentDidMount(){
-    this.listeningIfQuizAdded();
+  overrideNativeConfig(){
+    BackHandler.addEventListener('hardwareBackPress', () => {
+        this.props.navigation.popToTop();
+        return true;
+           });
   }
 
-  listeningIfQuizAdded(){
-    this.props.screenProps.storeFunctions.subscribe(() => this.setState({showLoading : false}, 
-      () => this.autoNavigateQuizScreen() ));
+  componentDidMount(){
   }
 
   autoNavigateQuizScreen(){
@@ -48,10 +50,8 @@ class HomeContainer extends React.Component {
         {amount : '10', difficulty : 'hard', type : 'boolean'}, false, false, null)
         .then((response) => response.json())
           .then((responseJson) => {
-              console.log(responseJson.results);
               this.props.addQuiz(responseJson.results);
-              console.log("oyeeee");
-              console.log(this.props.screenProps.storeFunctions.getState());
+              this.setState({showLoading : false}, () =>  this.autoNavigateQuizScreen());
             })
             .catch((error) => {
               console.log(error);
