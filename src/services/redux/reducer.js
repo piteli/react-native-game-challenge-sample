@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
-import {ADD_QUIZ_ANSWER, REMOVE_ALL_QUIZ} from './type';
+import {ADD_QUIZ_ANSWER, REMOVE_ALL_QUIZ, ADD_ANSWER} from './type';
 
 const INITIAL_STATE = {
-  quizs : []
+  quizs : [],
+  userAnswers : []
 };
 
 const quizReducer = (state = INITIAL_STATE, action) => {
@@ -12,10 +13,15 @@ const quizReducer = (state = INITIAL_STATE, action) => {
         ...state,
         quizs: state.quizs.concat(action.payload)
       }
-    case 'REMOVE_ALL_QUIZ':
+    case REMOVE_ALL_QUIZ:
       return {
         ...state,
         quizs: []
+      }
+    case ADD_ANSWER:
+      return {
+        ...state,
+        userAnswers: state.userAnswers.concat(action.payload)
       }
     default:
       return state

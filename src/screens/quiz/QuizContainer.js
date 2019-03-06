@@ -2,7 +2,7 @@ import React from "react";
 import Quiz from "./Quiz"
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addQuiz } from '../../services/redux/action';
+import { addAnswer } from '../../services/redux/action';
 
 class QuizContainer extends React.Component {
 
@@ -14,7 +14,7 @@ class QuizContainer extends React.Component {
 
   initiateStates(){
     this.state = {
-      currentQuestion : 1,
+      currentQuestionIndex : 1,
       questions : this.props.screenProps.storeFunctions.getState().quizs.quizs
     };
   }
@@ -29,7 +29,8 @@ class QuizContainer extends React.Component {
   setAnswer(){}
 
   render(){
-    return <Quiz question={this.state.questions} setAnswer={this.setAnswer} />;
+    return <Quiz question={this.state.questions} setAnswer={this.setAnswer} 
+                  currentQuestionIndex={this.state.currentQuestionIndex} />;
   }
 }
 
