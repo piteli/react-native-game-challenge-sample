@@ -9,26 +9,20 @@ export const styles = StyleSheet.create({
   alignItems : 'center'
   },
   sectionTop : {
-    flex : 0.2,
-    flexDirection : 'row',
-    justifyContent : 'center',
-    alignItems : 'center'
-  },
-  sectionCenter1 : {
     flex : 0.3,
     flexDirection : 'row',
     justifyContent : 'center',
     alignItems : 'center'
   },
-  sectionCenter2 : {
-    flex : 0.3,
+  sectionCenter : {
+    flex : 0.4,
     flexDirection : 'row',
     justifyContent : 'center',
     alignItems : 'center'
   },
   sectionBottom : {
-    flex : 0.2,
-    flexDirection : 'row',
+    flex : 0.3,
+    flexDirection : 'column',
     justifyContent : 'center',
     alignItems : 'center'
   },

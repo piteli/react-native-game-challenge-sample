@@ -5,7 +5,7 @@ export default class HomeIndex extends Component {
   render() {
     const { navigation } = this.props;
     return (
-        <HomeContainer navigation={navigation} />
+        <HomeContainer navigation={navigation} screenProps={this.props.screenProps} />
     );
   }
 }

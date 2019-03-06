@@ -28,6 +28,16 @@ export default class ApiMain extends React.Component {
     });
   }
 
+  getApiWithParams(baseUrl, path, authenticationType, params, useCustomHeader, addDefaultCustomHeader, extraArgsHeader){
+    const params_path = Object.entries(params).map(([key, val]) => `${key}=${val}`).join('&');
+    return fetch(`${baseUrl}${path}?${params_path}`, {
+      method: 'GET',
+      headers: useCustomHeader ?
+        this.addCustomHeader(addDefaultCustomHeader, authenticationType, extraArgsHeader) :
+        this.addDefaultHeader(authenticationType)
+    });
+  }
+
   postApi(baseUrl, path, body, authenticationType, useCustomHeader, addDefaultCustomHeader, extraArgsHeader){
     return fetch(`${baseUrl}${path}`, {
       method: 'POST',

@@ -4,6 +4,6 @@ import QuizContainer from './QuizContainer';
 export default class QuizIndex extends Component {
   render() {
     const { navigation } = this.props;
-    return <QuizContainer navigation={navigation} />;
+    return <QuizContainer navigation={navigation} screenProps={this.props.screenProps} />;
   }
 }

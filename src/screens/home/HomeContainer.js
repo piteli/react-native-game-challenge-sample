@@ -3,11 +3,8 @@ import Home from "./Home";
 import ApiMain from "../../services/Api";
 import Env from "../../../environments";
 import { connect } from 'react-redux';
-
-const mapStateToProps = (state) => {
-  const { quizs } = state
-  return { quizs }
-};
+import { bindActionCreators } from 'redux';
+import { addQuiz } from '../../services/redux/action';
 
 class HomeContainer extends React.Component {
 
@@ -26,12 +23,20 @@ class HomeContainer extends React.Component {
 
   initiateInstances(){
     this.beginGame = this.beginGame.bind(this);
-    //create redux store here
   }
   
 
   componentDidMount(){
+    this.listeningIfQuizAdded();
+  }
 
+  listeningIfQuizAdded(){
+    this.props.screenProps.storeFunctions.subscribe(() => this.setState({showLoading : false}, 
+      () => this.autoNavigateQuizScreen() ));
+  }
+
+  autoNavigateQuizScreen(){
+    this.props.navigation.push('quiz');
   }
 
   beginGame(){
@@ -39,16 +44,14 @@ class HomeContainer extends React.Component {
   }
 
   getAllQuestionAndAnswer(){
-        new ApiMain().getApi(new Env().getBaseUrl(),new Env().getPath()['get_quiz'], null,
-         false, false, null)
+        new ApiMain().getApiWithParams(new Env().getBaseUrl(),new Env().getPath()['initiateApi'], null,
+        {amount : '10', difficulty : 'hard', type : 'boolean'}, false, false, null)
         .then((response) => response.json())
           .then((responseJson) => {
               console.log(responseJson.results);
-               //store data to redux store
-
-              this.props.navigation.push('quiz');
-
-
+              this.props.addQuiz(responseJson.results);
+              console.log("oyeeee");
+              console.log(this.props.screenProps.storeFunctions.getState());
             })
             .catch((error) => {
               console.log(error);
@@ -60,4 +63,15 @@ class HomeContainer extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(HomeContainer);
+const mapStateToProps = (state) => {
+  const { quizs } = state
+  return { quizs }
+};
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    addQuiz,
+  }, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);

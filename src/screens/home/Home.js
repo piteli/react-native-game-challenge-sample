@@ -8,10 +8,7 @@ export default class Home extends React.Component {
   render(){
     return (
       <View style={styles.container}>
-        {
-          this.props.showLoading ? 
-          <PopupSpinner /> : null
-        }
+        <PopupSpinner loadingSpinnerVisible={this.props.showLoading} textDisplay={"Loading ..."}/>
         <View style={styles.sectionTop}>
           <Text>Welcome to Trivia Challenge</Text>
         </View>

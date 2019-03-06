@@ -11,7 +11,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={ store }>
-          <AppStack />
+          <AppStack screenProps={{ storeFunctions : store }} />
       </Provider>
     );
   }

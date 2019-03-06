@@ -1,0 +1,2 @@
+export const ADD_QUIZ_ANSWER = 'ADD_QUIZ_ANSWER'
+export const REMOVE_ALL_QUIZ = 'REMOVE_ALL_QUIZ'

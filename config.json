@@ -1,6 +1,6 @@
 {
-    "prodMode" : true,
-    "prodBaseUrl" : "http://api.moonkite.io:8080",
-    "devBaseUrl" : "http://api.moonkite.io:8080"
+    "prodMode" : false,
+    "prodBaseUrl" : "https://opentdb.com",
+    "devBaseUrl" : "https://opentdb.com"
   }
   
