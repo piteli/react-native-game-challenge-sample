@@ -9,7 +9,7 @@ export default class Home extends React.Component {
     return (
       <View style={styles.container}>
         {
-          this.state.showLoading ? 
+          this.props.showLoading ? 
           <PopupSpinner /> : null
         }
         <View style={styles.sectionTop}>

@@ -2,8 +2,14 @@ import React from "react";
 import Home from "./Home";
 import ApiMain from "../../services/Api";
 import Env from "../../../environments";
+import { connect } from 'react-redux';
 
-export default class HomeContainer extends React.Component {
+const mapStateToProps = (state) => {
+  const { quizs } = state
+  return { quizs }
+};
+
+class HomeContainer extends React.Component {
 
   constructor(props){
     super(props);
@@ -22,6 +28,7 @@ export default class HomeContainer extends React.Component {
     this.beginGame = this.beginGame.bind(this);
     //create redux store here
   }
+  
 
   componentDidMount(){
 
@@ -52,3 +59,5 @@ export default class HomeContainer extends React.Component {
     return <Home showLoading={this.state.showLoading} beginGame={this.beginGame} />;
   }
 }
+
+export default connect(mapStateToProps)(HomeContainer);
